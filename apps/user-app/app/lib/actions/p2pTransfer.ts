@@ -22,7 +22,7 @@ export async function p2pTransfer(to: string, amount: number) {
             message: "User not found"
         }
     }
-    //all of them should happen together
+    //all of them should happen together else none
     await prisma.$transaction(async (tx) => {
         //Locking to ensure performing multiple reqs simultaneouslt
         await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`;
